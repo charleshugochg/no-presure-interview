@@ -37,6 +37,12 @@ class PinController extends Controller
     public function store(StorepinRequest $request)
     {
         //
+        $validated = $request->validated();
+        $pin = new Pin;
+        $pin->title = $validated["title"];
+        $pin->description = $validated["description"];
+        $pin->User()->associate($request->user());
+        $pin->save();
     }
 
     /**
